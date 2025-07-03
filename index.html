@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>sorry for the bother..</title>
+	<script>
+		const openTime = 9;
+		const closeTime = 17;
+		const now = new Date();
+		const isWeekend = now.getDay() % 6 === 0;
+		const current_hour = now.getHours();
+		const isOpen = !isWeekend && current_hour >= openTime && current_hour < closeTime;
+		const messageReturn = (current_hour < openTime) ?
+			(((openTime - current_hour) < 2) ?
+				`at ${openTime}.` :
+				`in ${openTime - current_hour} hours.` ) :
+			`in ${24 - current_hour + openTime} hours.`;
+		const imagify = (s) => {
+			return s.split('\n').map(line => {
+				const t = line.trim();
+				if (t.match(/^</)) return t;
+				return t.split('').map(c => {
+					if (c.match(/[a-zA-Z]/)) {
+						return `<img src="./images/${c}.gif">`;
+					} else {
+						return c;
+					}
+				}).join('');
+			}).join('');
+		}
+		const messageWeekend = imagify(`
+			<body bgcolor="#ffffff"">
+			<div align=center>
+			<img src="./images/inc.gif" border=0 width=250 height=32 alt="sorry for the bother">
+			<br />
+			<br />
+			<br />
+			<br />
+			It is now the weekend and Inconvenient.com is closed.
+			<p>
+			Our hours are from ${openTime} AM to ${closeTime - 12} PM PST., weekdays
+			<p>
+			We truly value your business - please come back on Monday.
+			<br />
+			<br />
+			<br />
+			<br />
+			Sorry for the bother.
+			</div>
+		`);
+		const messageClosed = imagify(`
+			<body bgcolor="#ffffff"">
+			<div align=center>
+			<img src="./images/inc.gif" border=0 width=250 height=32 alt="sorry for the bother">
+			<br />
+			<br />
+			<br />
+			<br />
+			To conserve energy,
+			Inconvenient.com has
+			${current_hour < 12 ? "closed until the morning." : "closed for the evening."}
+			<p>
+			Our hours are from ${openTime} AM to ${closeTime - 12} PM PST., weekdays
+			<p>
+			We truly value your business - please come back
+			${messageReturn}
+			<br />
+			<br />
+			<br />
+			<br />
+			Sorry for the bother.
+			</div>
+		`);
+
+		const messageLogin = `
+			<code>
+			Trying 207.46.130.149...
+			<br />Connected to inconvenient.com.
+			<br />Escape character is '^]'.
+			<br />
+			<br />login: <a href="./login.html"><blink>_</blink></a>
+			</code>
+		`;
+
+		const message = isWeekend ? messageWeekend : (isOpen ? messageLogin : messageClosed);
+	</script>
+</head>
+<body>
+<div id="content" />
+<script>
+	document.getElementById("content").innerHTML = message;
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+#define	openTime	9
+#define	closeTime	17
+
+#define	index.html
+	<head>
+	<title>sorry for the bother..</title>
+	</head>
+#live	if ((getval(_current_weekday) == Sat) || (getval(_current_weekday) == Sun))
+	${imagify(
+	<body bgcolor="#ffffff"">
+	<div align=center>
+	<img src="${images}/inc.gif"
+		border=0 width=250 height=32 alt="sorry for the bother">
+	<br>
+	<br>
+	<br>
+	<br>
+	It is now the weekend and Inconvenient.com is closed.
+	<p>
+	Our hours are from ${pretty_time(${openTime})} to ${pretty_time(${closeTime})} PST., weekdays
+	<p>
+	We truly value your business - please come back on Monday.
+	<br>
+	<br>
+	<br>
+	<br>
+	Sorry for the bother.
+	</div>
+	)}
+#live	elseif ((getnum(_current_hour) < ${openTime}) || (getnum(_current_hour) >= ${closeTime}))
+	${imagify(
+	<body bgcolor="#ffffff"">
+	<div align=center>
+	<img src="${images}/inc.gif"
+		border=0 width=250 height=32 alt="sorry for the bother">
+	<br>
+	<br>
+	<br>
+	<br>
+#	It is now ${_current_time}.
+	To conserve energy,
+	Inconvenient.com has
+#live	if (getnum(_current_hour) < 12)
+	closed until the morning.
+#live	else
+	closed for the evening.
+#live	endif
+	<p>
+	Our hours are from ${pretty_time(${openTime})} to ${pretty_time(${closeTime})} PST., weekdays.
+	<p>
+	We truly value your business - please come back
+#live	if (getnum(_current_hour) < ${openTime})
+#live	if (eval(${openTime} - ${_current_hour}) < 2)
+	at ${pretty_time(${openTime})}.
+#live	else
+	in ${eval(${openTime} - ${_current_hour})} hours.
+#live	endif
+#live	else
+	${eval(30 - ${_current_hour})} hours.
+#live	endif
+	<br>
+	<br>
+	<br>
+	<br>
+	Sorry for the bother.
+	</div>
+	)}
+#live	else
+	<body bgcolor="#000000" text="#66ff33" link="#66ff33" vlink="#66ff33">
+	<code>
+	Trying 207.46.130.149...
+	<br>Connected to inconvenient.com.
+	<br>Escape character is '^]'.
+	<br>
+	<br>login: <a href="${base_url}/login.html"><blink>_</blink></a>
+	</code>
+#live	endif
+
+#define	login.html
+	<head>
+	<title>really sorry for the bother..</title>
+	</head>
+	<body bgcolor="#000000" text="#66ff33" link="#66ff33" vlink="#66ff33">
+	<code>
+	Trying 207.46.130.149...
+	<br>Connected to inconvenient.com.
+	<br>Escape character is '^]'.
+	<br>
+	<br>login: ${_session_int}
+	<br>password: <a href="${base_url}/password.html"><blink>_</blink></a>
+	</code>
+
+#define	redirect1	yahoo.com
+#define	redirect2	redmeat.com
+#define	redirect3	adjective.com
+#define	redirect4	smug.com
+#define	redirect5	slashdot.org
+#define	redirect6	sorry.com
+#define	redirect7	sideswipe.adjective.com
+#define	redirect8	mnslab.com
+#define	redirect9	achewood.com
+#define	redirect10	boingboing.net
+#define	redirect11	blah3.com
+#define	redirect12	disturbed.com
+
+#define	password.html
+	<script language=javascript>
+	document.location = "http://${redirect${random(11)}}";
+	</script>
+	<head>
+	<title>not really sorry for the bother..</title>
+	</head>
+	<body bgcolor="#000000" text="#66ff33" link="#66ff33" vlink="#66ff33">
+	<code>
+	Trying 207.46.130.149...
+	<br>Connected to inconvenient.com.
+	<br>Escape character is '^]'.
+	<br>
+	<br>login: ${_session_int}
+	<br>password: 
+	<br>Login incorrect
+	<p>Connection closed by foreign host.
+	</code>
