@@ -18,8 +18,10 @@
 				const t = line.trim();
 				if (t.match(/^</)) return t;
 				return t.split('').map(c => {
-					if (c.match(/[a-zA-Z]/)) {
+					if (c.match(/[A-Z]/)) {
 						return `<img src="./images/${c}.gif">`;
+					} else if (c.match(/[a-z]/)) {
+						return `<img src="./images/lower/${c}.gif">`;
 					} else {
 						return c;
 					}
